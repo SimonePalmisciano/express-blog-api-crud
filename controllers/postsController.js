@@ -7,9 +7,31 @@ COME PAGINA PRINCIPALE
 metodo : 'GET'   http://localhost:3000/posts
 */
 function index(request, response) {
-    response
-        .status(200)
-        .json(posts)
+    const { tags: searchTags } = request.query;
+
+    if (searchTags.trim() === '') {
+        response.status(400)
+            .json({
+                errore: `valore vuoto, per favore riempi "?tags="`,
+                risultato: null
+            });
+    }
+
+    const postFiltered = posts.filter(post => {
+        if (searchTags === undefined) {
+            return true;
+        }
+
+        for (let z = 0; z < post.tags.length; z++) {
+            if (post.tags[z].indexOf(searchTags) !== -1) {
+                return true;
+            }
+        }
+
+        return post.tags.includes(searchTags);
+    })
+
+    response.json(postFiltered);
 };
 
 /* 
