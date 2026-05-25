@@ -7,7 +7,9 @@ COME PAGINA PRINCIPALE
 metodo : 'GET'   http://localhost:3000/posts
 */
 function index(request, response) {
-    response.json(posts)
+    response
+        .status(200)
+        .json(posts)
 };
 
 /* 
@@ -75,10 +77,35 @@ ARRAY DI POSTS
 metodo : 'DELETE'  http://localhost:3000/posts
 */
 function destroy(request, response) {
-    const {id} = request.params;
-    response.json({
-        messaggio: `hai inviato una richiesta per distruggere il post: ${id}`
-    })
+    const { id } = request.params;
+
+    const realId = Number(id.trim());
+
+    if (isNaN(realId) || realId <= 0) {
+        response.status(400)
+            .json({
+                errore: '"id" non corretto o minore di 0',
+                risultato: null
+            });
+        return;
+    }
+
+    const postFound = posts.findIndex(post => {
+        return post.id === realId;
+    });
+
+    if (postFound === -1) {
+        response.json({
+            errore: 'post non trovato',
+            risultato: null
+        })
+    }
+    console.log(postFound);
+
+
+    posts.splice(postFound, 1);
+
+    response.json(posts);
 }
 
 export {
