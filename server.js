@@ -8,6 +8,8 @@ const port = process.env.SERVER_PORT || 3000;
 const app = express();
 
 app.use(express.static('public'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use('/posts', postsRouter);
 

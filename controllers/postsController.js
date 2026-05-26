@@ -15,6 +15,7 @@ function index(request, response) {
                 errore: `valore vuoto, per favore riempi "?tags="`,
                 risultato: null
             });
+            return;
     }
 
     const postFiltered = posts.filter(post => {
@@ -23,6 +24,7 @@ function index(request, response) {
         }
 
         for (let z = 0; z < post.tags.length; z++) {
+            console.log(post.tags[z].indexOf(searchTags));
             if (post.tags[z].indexOf(searchTags) !== -1) {
                 return true;
             }
@@ -62,6 +64,7 @@ function show(request, response) {
             errore: 'post non trovato',
             risultato: null
         })
+        return;
     }
 
     response.json({
@@ -121,9 +124,8 @@ function destroy(request, response) {
             errore: 'post non trovato',
             risultato: null
         })
+        return;
     }
-    console.log(postFound);
-
 
     posts.splice(postFound, 1);
 
