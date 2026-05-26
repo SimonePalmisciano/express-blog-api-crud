@@ -143,24 +143,92 @@ function update(request, response) {
     const realId = Number(id.trim());
 
     if (isNaN(realId) || realId <= 0) {
-        return response.status(400).json({
-            errore: '"id" non corretto o minore o uguale a 0',
-            risultato: null
-        });
+        return response.status(400)
+            .json({
+                errore: '"id" non corretto o minore o uguale a 0',
+                risultato: null
+            });
     }
 
     const postIndex = posts.findIndex(post => post.id === realId);
 
     if (postIndex === -1) {
-        return response.status(404).json({
-            errore: 'post non trovato',
-            risultato: null
-        });
+        return response.status(404)
+            .json({
+                errore: 'post non trovato',
+                risultato: null
+            });
     }
 
+    const { titolo, contenuto, img, tags } = request.body;
+    
+    if (titolo === undefined || typeof titolo !== 'string' || titolo.trim() === '') {
+        response.status(400)
+            .json({
+                errore: 'il campo "titolo" è obbligatorio e deve essere una stringa non vuota',
+                risultato: null
+            });
+    }
+
+    if (contenuto === undefined || typeof contenuto !== 'string' || contenuto.trim() === '') {
+        response.status(400)
+            .json({
+                errore: 'il campo "contenuto" è obbligatorio e deve essere una stringa non vuota',
+                risultato: null
+            });
+    }
+
+    if (img === undefined || typeof img !== 'string' || img.trim() === '') {
+        response.status(400)
+            .json({
+                errore: 'il campo "img" è obbligatorio e deve essere una stringa non vuota',
+                risultato: null
+            });
+    }
+
+    if (tags === undefined || !Array.isArray(tags)) {
+        response.status(400)
+            .json({
+                errore: 'il campo "tags" è obbligatorio e deve essere un array',
+                risultato: null
+            });
+    }
+
+    if (tags.length === 0) {
+        response.status(400)
+            .json({
+                errore: 'il campo "tags" non può essere un array vuoto',
+                risultato: null
+            });
+    }
+
+    const tagNonValidi = tags.some(tag => {
+        return typeof tag !== 'string' || tag.trim() === '';
+    });
+
+    if (tagNonValidi) {
+        response.status(400)
+            .json({
+                errore: 'tutti i tag devono essere stringhe non vuote',
+                risultato: null
+            });
+    }
+
+    const updatedPost = {
+        id: realId,
+        titolo: titolo.trim(),
+        contenuto: contenuto.trim(),
+        img: img.trim(),
+        tags: tags.map(tag => tag.trim())
+    };
+
+    posts[postIndex] = updatedPost;
+
     response.json({
-        messaggio: `hai inviato una richiesta di modificare interamente un elemento con id: ${realId} `
-    })
+        errore: null,
+        messaggio: 'post aggiornato con successo',
+        risultato: updatedPost
+    });
 }
 
 function modify(request, response) {
