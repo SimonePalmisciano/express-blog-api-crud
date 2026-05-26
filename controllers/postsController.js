@@ -139,8 +139,27 @@ function store(request, response) {
 }
 
 function update(request, response) {
+    const { id } = request.params;
+    const realId = Number(id.trim());
+
+    if (isNaN(realId) || realId <= 0) {
+        return response.status(400).json({
+            errore: '"id" non corretto o minore o uguale a 0',
+            risultato: null
+        });
+    }
+
+    const postIndex = posts.findIndex(post => post.id === realId);
+
+    if (postIndex === -1) {
+        return response.status(404).json({
+            errore: 'post non trovato',
+            risultato: null
+        });
+    }
+
     response.json({
-        messaggio: 'hai inviato una richiesta di modificare interamente un elemento'
+        messaggio: `hai inviato una richiesta di modificare interamente un elemento con id: ${realId} `
     })
 }
 
