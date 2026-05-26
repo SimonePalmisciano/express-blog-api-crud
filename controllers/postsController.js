@@ -9,20 +9,18 @@ metodo : 'GET'   http://localhost:3000/posts
 function index(request, response) {
     const { tags: searchTags } = request.query;
 
+    if (searchTags === undefined) {
+        return response.json(posts);
+    }
+
     if (searchTags.trim() === '') {
-        response.status(400)
-            .json({
-                errore: `valore vuoto, per favore riempi "?tags="`,
-                risultato: null
-            });
-            return;
+        return response.status(400).json({
+            errore: 'valore vuoto, per favore riempi "?tags="',
+            risultato: null
+        });
     }
 
     const postFiltered = posts.filter(post => {
-        if (searchTags === undefined) {
-            return true;
-        }
-
         for (let z = 0; z < post.tags.length; z++) {
             console.log(post.tags[z].indexOf(searchTags));
             if (post.tags[z].indexOf(searchTags) !== -1) {
@@ -34,7 +32,7 @@ function index(request, response) {
     })
 
     response.json(postFiltered);
-};
+}
 
 /* 
 FUNZIONE CHE MOSTRA IL POST CHE ABBIAMO CERCATO 
@@ -79,9 +77,11 @@ ARRAY DI POSTS
 metodo : 'POST'  http://localhost:3000/posts
 */
 function store(request, response) {
+    console.log(request.body);
     response.json({
-        messaggio: 'hai inviato una richiesta di creazione'
-    })
+        messaggio: 'dati ricevuti correttamente',
+        risultato: request.body
+    });
 }
 
 function update(request, response) {
