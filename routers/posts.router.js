@@ -6,7 +6,8 @@ import {
     update,
     modify,
     destroy
-} from '../controllers/postsController.js';
+} from '../controllers/posts.controllers.js';
+import validatePost from '../middlewares/validatePostData.js';
 
 const router = express.Router();
 
@@ -14,9 +15,9 @@ router.get('/', index);
 
 router.get('/:id', show);
 
-router.post('/', store);
+router.post('/', validatePost, store);
 
-router.put('/:id', update);
+router.put('/:id', validatePost, update);
 
 router.patch('/:id', modify);
 

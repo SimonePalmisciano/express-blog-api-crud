@@ -2,6 +2,7 @@ export const posts = [
     {
         id: 1,
         titolo: 'Il caffè è un linguaggio di programmazione',
+        slug: 'caffe-programmazione',
         contenuto: 'Secondo le ricerche scientifiche, gli sviluppatori hanno bisogno di almeno 2-3 tazze di caffè per generare un "Hello World". Il caffè non è solo una bevanda, è il nostro debugger naturale.',
         img: 'Bob.jpg',
         tags: ['caffè', 'developer-life', 'umorismo'],
@@ -9,6 +10,7 @@ export const posts = [
     {
         id: 2,
         titolo: 'Stack Overflow: il nostro secondo cervello',
+        slug: 'stack-overflow',
         contenuto: 'Non è imbarazzante cercare su Stack Overflow. È scienza. Secondo le statistiche, il 99% dei developer mondiali ha copiato-incollato almeno una volta da lì. Benvenuti nel club!',
         img: 'equalizer.jpg',
         tags: ['stack-overflow', 'programmazione', 'verità-universali'],
@@ -16,6 +18,7 @@ export const posts = [
     {
         id: 3,
         titolo: 'Il commit perfetto non esi... wait, let me refactor',
+        slug: 'commit-perfetto',
         contenuto: 'Iniziamo con un commit perfetto con un bel messaggio descrittivo. Poi arriva il martedì e abbiamo "fix", "update", "omg this should work", "nope", "seriously?". La poesia del git.',
         img: 'Kate-Upton.jpg',
         tags: ['git', 'commit', 'developer-humor'],
@@ -23,6 +26,7 @@ export const posts = [
     {
         id: 4,
         titolo: 'Debugging: quando il codice decide di fare il misterioso',
+        slug: 'debugging-codice',
         contenuto: 'Funziona sul mio computer. Quando lo sposti su un altro pc, il codice improvvisamente dimentica tutto quello che sa. È come se avesse amnesia selettiva basata sulla posizione geografica.',
         img: 'losAngeles.jpg',
         tags: ['bug', 'debugging', 'frustrazione'],
@@ -30,6 +34,7 @@ export const posts = [
     {
         id: 5,
         titolo: 'La riunione di standup: "Cosa hai fatto ieri?"',
+        slug: 'standup-riunione',
         contenuto: 'Ieri: Combattuto con 3 bug, rifattorizzato il codice e scoperto che la soluzione era un refresh della cache. Risposta in riunione: "Hmm... robe".',
         img: 'LosSantos.jpg',
         tags: ['standup', 'riunioni', 'lavoro'],
@@ -37,6 +42,7 @@ export const posts = [
     {
         id: 6,
         titolo: 'Responsive design: il incubo di ogni developer frontend',
+        slug: 'responsive-design',
         contenuto: 'Desktop: perfetto. Tablet: ragionevole. Mobile: perché? Sembra che il browser mobile abbia deciso di giocare secondo regole diverse. CSS media queries: a volte amore, a volte guerra.',
         img: 'mariouana.jpg',
         tags: ['frontend', 'css', 'responsive-design'],
@@ -44,6 +50,7 @@ export const posts = [
     {
         id: 7,
         titolo: 'Array.map() vs for loop: la guerra eterna',
+        slug: 'array-map-for-loop',
         contenuto: 'Quale scegliere? Dipende dal tuo umore. Lunedì mattina: for loop, è più semplice. Mercoledì dopo caffè: map, filter, reduce concatenati come una sinfonia.',
         img: 'metro.jpg',
         tags: ['javascript', 'programmazione', 'filosofia-dev'],
@@ -51,6 +58,7 @@ export const posts = [
     {
         id: 8,
         titolo: 'Il merge conflict: il momento in cui il destino decide di scherzare',
+        slug: 'merge-conflict',
         contenuto: 'Due branch, stessa riga modificata. Git dice "scegli tu". E così passiamo 10 minuti a capire quale versione del nostro codice ha più senso. Spoiler: nessuna.',
         img: 'neve.jpg',
         tags: ['git', 'merge', 'coding'],

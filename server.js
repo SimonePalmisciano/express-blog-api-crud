@@ -1,6 +1,6 @@
 import express from 'express';
-import { posts } from './data/postsData.js';
-import postsRouter from './routers/posts.js';
+import { posts } from './data/posts.data.js';
+import postsRouter from './routers/posts.router.js';
 import notFound from './middlewares/notFoundHandler.js';
 import errorHandler from './middlewares/errorHandler.js';
 
