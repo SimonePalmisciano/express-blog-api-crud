@@ -1,6 +1,7 @@
 import express from 'express';
 import { posts } from './data/postsData.js';
 import postsRouter from './routers/posts.js';
+import notFound from './middlewares/NotFound.js';
 
 const url = process.env.SERVER_URL;
 const port = process.env.SERVER_PORT || 3000;
@@ -26,7 +27,9 @@ app.get("/bacheca", (request, response) => {
             img: `http://${url}:${port}/${post.img}`,
         }
     }));
-})
+});
+
+app.use(notFound);
 
 app.listen(port, (error) => {
     if (error) {
