@@ -9,15 +9,18 @@ metodo : 'GET'   http://localhost:3000/posts
 function index(request, response) {
     const { tags: searchTags } = request.query;
 
+    throw new Error('errore potentissimo')
+
     if (searchTags === undefined) {
         return response.json(posts);
     }
 
     if (searchTags.trim() === '') {
-        return response.status(400).json({
-            errore: 'valore vuoto, per favore riempi "?tags="',
-            risultato: null
-        });
+        return response.status(400)
+            .json({
+                errore: 'valore vuoto, per favore riempi "?tags="',
+                risultato: null
+            });
     }
 
     const postFiltered = posts.filter(post => {
@@ -58,10 +61,11 @@ function show(request, response) {
     });
 
     if (postFound === undefined) {
-        response.json({
-            errore: 'post non trovato',
-            risultato: null
-        })
+        response.status(400)
+            .json({
+                errore: 'post non trovato',
+                risultato: null
+            })
         return;
     }
 
@@ -161,7 +165,7 @@ function update(request, response) {
     }
 
     const { titolo, contenuto, img, tags } = request.body;
-    
+
     if (titolo === undefined || typeof titolo !== 'string' || titolo.trim() === '') {
         response.status(400)
             .json({
